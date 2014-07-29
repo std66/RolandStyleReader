@@ -28,7 +28,6 @@ See issues tab.
 Contact
 -------
 Author: Sinku Tamás
-
 E-mail: sinkutamas@gmail.com
 
 Warranty
