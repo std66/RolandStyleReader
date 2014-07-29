@@ -32,7 +32,7 @@ E-mail: sinkutamas@gmail.com
 
 Warranty
 --------
-This library comes with absolutely no warranty. The author isn't take responsibility for any damages or data loss.
+This library comes with absolutely no warranty. The author does not take responsibility for any damages or data loss.
 
 Licensing
 ---------
