@@ -27,8 +27,7 @@ See issues tab.
 
 Contact
 -------
-Author: Sinku Tamás
-E-mail: sinkutamas@gmail.com
+Author: Sinku Tamás (sinkutamas@gmail.com)
 
 Warranty
 --------
@@ -36,4 +35,4 @@ This library comes with absolutely no warranty. The author does not take respons
 
 Licensing
 ---------
-Licensed under GNU GPL v2. See LICENSE for more details.
+Licensed under GNU GPL v3. See LICENSE for more details.
