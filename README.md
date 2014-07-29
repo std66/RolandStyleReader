@@ -23,11 +23,12 @@ https://code.google.com/p/midi-dot-net/
 
 Known issues
 ------------
-- Wrong timing of the messages
+See issues tab.
 
 Contact
 -------
 Author: Sinku Tamás
+
 E-mail: sinkutamas@gmail.com
 
 Warranty
