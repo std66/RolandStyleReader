@@ -8,6 +8,14 @@ namespace TomiSoft.RolandStyleReader {
 	/// Represents the style signatures
 	/// </summary>
 	public enum StyleSignature {
-		EV, G8
+		/// <summary>
+		/// Represents the EV style signature
+		/// </summary>
+		EV,
+
+		/// <summary>
+		/// Represents the G8 style signature
+		/// </summary>
+		G8
 	}
 }

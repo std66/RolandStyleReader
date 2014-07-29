@@ -10,16 +10,16 @@ namespace TomiSoft.RolandStyleReader {
 	/// </summary>
 	public abstract class MidiMessage {
 		/// <summary>
-		/// Gets the channel of the message. For G-70-like styles, this value is 0.
+		/// Gets the channel of the message. For G-70-like styles, this value is 0x0.
 		/// 
-		/// 11 - Bass
-		/// 19 - Drum
-		/// 10 - Acc1
-		/// 12 - Acc2
-		/// 14 - Acc3
-		/// 16 - Acc4
-		/// 18 - Acc5
-		/// 20 - Acc6
+		/// <para>0x11 - Bass</para>
+		/// <para>0x19 - Drum</para>
+		/// <para>0x10 - Acc1</para>
+		/// <para>0x12 - Acc2</para>
+		/// <para>0x14 - Acc3</para>
+		/// <para>0x16 - Acc4</para>
+		/// <para>0x18 - Acc5</para>
+		/// <para>0x20 - Acc6</para>
 		/// </summary>
 		public int Channel {
 			get {
@@ -54,6 +54,9 @@ namespace TomiSoft.RolandStyleReader {
 			get { return totalTime; }
 		}
 
+		/// <summary>
+		/// This field stores the binary coded message data
+		/// </summary>
 		protected byte[] Data;
 
 		/// <summary>

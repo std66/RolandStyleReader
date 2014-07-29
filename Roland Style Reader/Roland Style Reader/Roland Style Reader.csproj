@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Roland Style Reader.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -48,6 +49,8 @@
     <Compile Include="Messages\ControlChangeMessage.cs" />
     <Compile Include="Messages\DataEntryMessage.cs" />
     <Compile Include="Messages\NoteMessage.cs" />
+    <Compile Include="Messages\NoteValueOutOfRangeException.cs" />
+    <Compile Include="Messages\NoteVelocityOutOfRangeException.cs" />
     <Compile Include="Messages\PitchWheelMessage.cs" />
     <Compile Include="Messages\ProgramChangeMessage.cs" />
     <Compile Include="MidiMessage.cs" />

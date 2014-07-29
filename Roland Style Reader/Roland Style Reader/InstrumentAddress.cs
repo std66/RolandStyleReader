@@ -33,6 +33,11 @@ namespace TomiSoft.RolandStyleReader {
 			get { return seventh; }
 		}
 
+		/// <summary>
+		/// If available, gets the address of the style part in the given chord family
+		/// </summary>
+		/// <param name="Type"></param>
+		/// <returns></returns>
 		public int this[ChordType Type] {
 			get {
 				if (this.IsAvailable(Type))
@@ -54,10 +59,20 @@ namespace TomiSoft.RolandStyleReader {
 			this.seventh = Seventh;
 		}
 
+		/// <summary>
+		/// Determines whether that the style part is available in the given chord family
+		/// </summary>
+		/// <param name="Type">The chord family</param>
+		/// <returns></returns>
 		public bool IsAvailable(ChordType Type) {
 			return (this.GetAddress(Type) > 0);
 		}
 
+		/// <summary>
+		/// Gets the address of the style part in the given chord family
+		/// </summary>
+		/// <param name="Type">The chord family</param>
+		/// <returns>The address of the style part data</returns>
 		private int GetAddress(ChordType Type) {
 			switch (Type) {
 				case ChordType.Major: return this.major;
