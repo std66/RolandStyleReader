@@ -21,6 +21,10 @@ A simple example is available in the "StyleDemo" project. Note that this project
 example the Midi-dot-net library is used for playback the style. For more information and license, see
 https://code.google.com/p/midi-dot-net/
 
+Known issues
+------------
+- Wrong timing of the messages
+
 Contact
 -------
 Author: Sinku Tamás
