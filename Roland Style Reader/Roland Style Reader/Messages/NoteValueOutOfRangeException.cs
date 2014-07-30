@@ -7,7 +7,7 @@ namespace TomiSoft.RolandStyleReader {
 	/// <summary>
 	/// This exception occures when a note's value is less than 0 or larger than 127
 	/// </summary>
-	class NoteValueOutOfRangeException : Exception {
+	public class NoteValueOutOfRangeException : Exception {
 		private int noteValue;
 
 		/// <summary>

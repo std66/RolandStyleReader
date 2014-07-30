@@ -12,6 +12,10 @@ using Midi;
 namespace StyleDemo {
 	public partial class Form1 : Form {
 		private RolandStyle style;
+		private bool IsBasic = true;
+		private StylePart Part = StylePart.Intro;
+		private TomiSoft.RolandStyleReader.Instrument instr = TomiSoft.RolandStyleReader.Instrument.Drum;
+		private ChordType ctype = ChordType.Major;
 
 		public Form1() {
 			InitializeComponent();
@@ -22,6 +26,18 @@ namespace StyleDemo {
 			dlg.Filter = "Roland style (*.stl)|*.stl";
 
 			if (dlg.ShowDialog() == DialogResult.OK) {
+				#region Do some WinForms shit
+				this.btnPlay.Enabled = true;
+				this.comboBox1.Enabled = true;
+				this.comboBox2.Enabled = true;
+				this.comboBox3.Enabled = true;
+				this.comboBox4.Enabled = true;
+				//this.comboBox1.SelectedIndex = 0;
+				//this.comboBox2.SelectedIndex = 0;
+				//this.comboBox3.SelectedIndex = 0;
+				//this.comboBox4.SelectedIndex = 0;
+				#endregion
+
 				this.style = new RolandStyle(dlg.FileName);
 
 				this.lStyleName.Text = this.style.Name;
@@ -31,11 +47,15 @@ namespace StyleDemo {
 
 				this.pbBeat.Maximum = this.style.Measure.Numerator;
 
-				lwMessages.Items.Clear();
+				this.RenderMessages();
+			}
+		}
 
-				float a = (this.style.Tempo * 120) / 60000f;
+		private void RenderMessages() {
+			lwMessages.Items.Clear();
 
-				foreach (MidiMessage msg in this.style[true, StylePart.Intro, TomiSoft.RolandStyleReader.Instrument.Drum, ChordType.Major]) {
+			try {
+				foreach (MidiMessage msg in this.style[this.IsBasic, this.Part, this.instr, this.ctype]) {
 					ListViewItem lwi = new ListViewItem(StyleTime.FromStyleMessage(msg, this.style).ToString());
 					lwi.SubItems.Add(msg.MessageType.ToString());
 					lwi.SubItems.Add(msg.Channel.ToString());
@@ -64,6 +84,30 @@ namespace StyleDemo {
 
 					lwMessages.Items.Add(lwi);
 				}
+			}
+			catch (NoteValueOutOfRangeException) {
+				MessageBox.Show(
+					"A hang számának 0 és 127 közé kell esnie",
+					"Hiba",
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Error
+				);
+			}
+			catch (NoteVelocityOutOfRangeException) {
+				MessageBox.Show(
+					"A hang dinamikájának 0 és 127 közé kell esnie",
+					"Hiba",
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Error
+				);
+			}
+			catch (Exception) {
+				MessageBox.Show(
+					"A kért rész nem létezik a fájlban",
+					"Hiba",
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Error
+				);
 			}
 		}
 
@@ -94,10 +138,22 @@ namespace StyleDemo {
 
 			float LastMsgTime = 0;
 
-			foreach (var CurrentMessage in this.style[true, StylePart.Intro, TomiSoft.RolandStyleReader.Instrument.Drum, ChordType.Major]) {
-				if (CurrentMessage.MessageType == MidiMessageType.Note) {
-					clock.Schedule(this.ToMessage(CurrentMessage, dev, clock, out LastMsgTime));
+			try {
+				foreach (var CurrentMessage in this.style[this.IsBasic, this.Part, this.instr, this.ctype]) {
+					if (CurrentMessage.MessageType == MidiMessageType.Note) {
+						clock.Schedule(this.ToMessage(CurrentMessage, dev, clock, out LastMsgTime));
+					}
 				}
+			}
+			catch (Exception) {
+				MessageBox.Show(
+					"A kért rész nem létezik a fájlban",
+					"Hiba",
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Error
+				);
+
+				return;
 			}
 
 			clock.Start();
@@ -114,6 +170,57 @@ namespace StyleDemo {
 			dev.Close();
 
 			pbBeat.Value = 0;
+		}
+
+		private void comboBox2_SelectedIndexChanged(object sender, EventArgs e) {
+			this.IsBasic = comboBox2.SelectedIndex == 0;
+			this.RenderMessages();
+		}
+
+		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) {
+			StylePart[] parts = new StylePart[] {
+				StylePart.Intro,
+				StylePart.Original,
+				StylePart.Variation,
+				StylePart.Variation2,
+				StylePart.FillToVariation,
+				StylePart.FillToVariation2,
+				StylePart.FillToOriginal,
+				StylePart.Ending
+			};
+
+			this.Part = parts[comboBox1.SelectedIndex];
+
+			this.RenderMessages();
+		}
+
+		private void comboBox3_SelectedIndexChanged(object sender, EventArgs e) {
+			TomiSoft.RolandStyleReader.Instrument[] i = new TomiSoft.RolandStyleReader.Instrument[] {
+				TomiSoft.RolandStyleReader.Instrument.Drum,
+				TomiSoft.RolandStyleReader.Instrument.Bass,
+				TomiSoft.RolandStyleReader.Instrument.Acc1,
+				TomiSoft.RolandStyleReader.Instrument.Acc2,
+				TomiSoft.RolandStyleReader.Instrument.Acc3,
+				TomiSoft.RolandStyleReader.Instrument.Acc4,
+				TomiSoft.RolandStyleReader.Instrument.Acc5,
+				TomiSoft.RolandStyleReader.Instrument.Acc6
+			};
+
+			this.instr = i[comboBox3.SelectedIndex];
+
+			this.RenderMessages();
+		}
+
+		private void comboBox4_SelectedIndexChanged(object sender, EventArgs e) {
+			ChordType[] t = new ChordType[] {
+				ChordType.Major,
+				ChordType.Minor,
+				ChordType.Seventh
+			};
+
+			this.ctype = t[comboBox4.SelectedIndex];
+
+			this.RenderMessages();
 		}
 	}
 }

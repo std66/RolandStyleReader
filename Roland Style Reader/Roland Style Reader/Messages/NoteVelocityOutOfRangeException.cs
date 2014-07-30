@@ -7,7 +7,7 @@ namespace TomiSoft.RolandStyleReader {
 	/// <summary>
 	/// This exception occures when a note's velocity value is less than 0 or larger than 127
 	/// </summary>
-	class NoteVelocityOutOfRangeException : Exception {
+	public class NoteVelocityOutOfRangeException : Exception {
 		private int velocity;
 
 		/// <summary>
