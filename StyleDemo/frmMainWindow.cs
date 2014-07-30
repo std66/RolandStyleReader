@@ -10,15 +10,26 @@ using TomiSoft.RolandStyleReader;
 using Midi;
 
 namespace StyleDemo {
-	public partial class Form1 : Form {
+	public partial class frmMainWindow : Form {
 		private RolandStyle style;
 		private bool IsBasic = true;
 		private StylePart Part = StylePart.Intro;
 		private TomiSoft.RolandStyleReader.Instrument instr = TomiSoft.RolandStyleReader.Instrument.Drum;
 		private ChordType ctype = ChordType.Major;
+		OutputDevice dev = OutputDevice.InstalledDevices[0];
 
-		public Form1() {
+		public frmMainWindow() {
 			InitializeComponent();
+
+			this.comboBox1.SelectedIndex = 0;
+			this.comboBox2.SelectedIndex = 0;
+			this.comboBox3.SelectedIndex = 0;
+			this.comboBox4.SelectedIndex = 0;
+
+			this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+			this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+			this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
+			this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
 		}
 
 		private void openToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -32,16 +43,12 @@ namespace StyleDemo {
 				this.comboBox2.Enabled = true;
 				this.comboBox3.Enabled = true;
 				this.comboBox4.Enabled = true;
-				//this.comboBox1.SelectedIndex = 0;
-				//this.comboBox2.SelectedIndex = 0;
-				//this.comboBox3.SelectedIndex = 0;
-				//this.comboBox4.SelectedIndex = 0;
 				#endregion
 
 				this.style = new RolandStyle(dlg.FileName);
 
 				this.lStyleName.Text = this.style.Name;
-				this.lSignature.Text = this.style.Signature.ToString() + " formátumú stílus";
+				this.lSignature.Text = this.style.Signature.ToString() + " format style";
 				this.lMetronomeMark.Text = this.style.Measure.ToString();
 				this.lTempo.Text = this.style.Tempo + " BPM";
 
@@ -87,24 +94,24 @@ namespace StyleDemo {
 			}
 			catch (NoteValueOutOfRangeException) {
 				MessageBox.Show(
-					"A hang számának 0 és 127 közé kell esnie",
-					"Hiba",
+					"Note number must be in range 0-127",
+					"Error",
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Error
 				);
 			}
 			catch (NoteVelocityOutOfRangeException) {
 				MessageBox.Show(
-					"A hang dinamikájának 0 és 127 közé kell esnie",
-					"Hiba",
+					"Note velocity must be in range 0-127",
+					"Error",
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Error
 				);
 			}
 			catch (Exception) {
 				MessageBox.Show(
-					"A kért rész nem létezik a fájlban",
-					"Hiba",
+					"The style does not contain information for the selected part",
+					"Error",
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Error
 				);
@@ -130,7 +137,6 @@ namespace StyleDemo {
 		}
 
 		private void btnPlay_Click(object sender, EventArgs e) {
-			OutputDevice dev = OutputDevice.InstalledDevices[0];
 			dev.Open();
 			Clock clock = new Clock(this.style.Tempo);
 
@@ -145,14 +151,31 @@ namespace StyleDemo {
 					}
 				}
 			}
-			catch (Exception) {
+			catch (NoteValueOutOfRangeException) {
 				MessageBox.Show(
-					"A kért rész nem létezik a fájlban",
-					"Hiba",
+					"Note number must be in range 0-127",
+					"Error",
 					MessageBoxButtons.OK,
 					MessageBoxIcon.Error
 				);
-
+				return;
+			}
+			catch (NoteVelocityOutOfRangeException) {
+				MessageBox.Show(
+					"Note velocity must be in range 0-127",
+					"Error",
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Error
+				);
+				return;
+			}
+			catch (Exception) {
+				MessageBox.Show(
+					"The style does not contain information for the selected part",
+					"Error",
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Error
+				);
 				return;
 			}
 
@@ -160,8 +183,11 @@ namespace StyleDemo {
 
 			while (clock.Time <= LastMsgTime) {
 				System.Threading.Thread.Sleep(50);
+
 				StyleTime t = StyleTime.FromStyleTimestamp((int)(clock.Time * 120), this.style);
-				label1.Text = t.ToString();
+				lFriendlyTime.Text = String.Format("{0}.{1}.{2}", t.Bar, t.Beat, t.ClockPulseTime);
+				lTotalTime.Text = t.RawTime.ToString();
+
 				pbBeat.Value = t.Beat;
 				Application.DoEvents();
 			}
@@ -170,8 +196,11 @@ namespace StyleDemo {
 			dev.Close();
 
 			pbBeat.Value = 0;
+			lFriendlyTime.Text = "0.0.0";
+			lTotalTime.Text = "0";
 		}
 
+		#region Style Part Select Comboboxes
 		private void comboBox2_SelectedIndexChanged(object sender, EventArgs e) {
 			this.IsBasic = comboBox2.SelectedIndex == 0;
 			this.RenderMessages();
@@ -221,6 +250,14 @@ namespace StyleDemo {
 			this.ctype = t[comboBox4.SelectedIndex];
 
 			this.RenderMessages();
+		}
+		#endregion
+
+		private void mIDISettingsToolStripMenuItem_Click(object sender, EventArgs e) {
+			OutputDeviceSelectDialog dlg = new OutputDeviceSelectDialog();
+
+			if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+				this.dev = dlg.Device;
 		}
 	}
 }

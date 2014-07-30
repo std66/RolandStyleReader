@@ -52,19 +52,28 @@
     <Compile Include="CustomProgressBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="frmMainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="frmMainWindow.Designer.cs">
+      <DependentUpon>frmMainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OutputDeviceSelectDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OutputDeviceSelectDialog.Designer.cs">
+      <DependentUpon>OutputDeviceSelectDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CustomProgressBar.resx">
       <DependentUpon>CustomProgressBar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="frmMainWindow.resx">
+      <DependentUpon>frmMainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OutputDeviceSelectDialog.resx">
+      <DependentUpon>OutputDeviceSelectDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -1,5 +1,5 @@
 ﻿namespace StyleDemo {
-	partial class Form1 {
+	partial class frmMainWindow {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
@@ -26,6 +26,8 @@
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.mIDISettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.lStyleName = new System.Windows.Forms.Label();
 			this.lSignature = new System.Windows.Forms.Label();
 			this.lMetronomeMark = new System.Windows.Forms.Label();
@@ -43,19 +45,25 @@
 			this.comboBox3 = new System.Windows.Forms.ComboBox();
 			this.comboBox4 = new System.Windows.Forms.ComboBox();
 			this.btnPlay = new System.Windows.Forms.Button();
-			this.label1 = new System.Windows.Forms.Label();
+			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.lFriendlyTime = new System.Windows.Forms.Label();
+			this.lTotalTime = new System.Windows.Forms.Label();
 			this.pbBeat = new StyleDemo.CustomProgressBar();
 			this.menuStrip1.SuspendLayout();
 			this.gbStyleInfo.SuspendLayout();
+			this.groupBox1.SuspendLayout();
+			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.optionsToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(579, 24);
+			this.menuStrip1.Size = new System.Drawing.Size(616, 24);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -74,29 +82,44 @@
 			this.openToolStripMenuItem.Text = "Open";
 			this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
 			// 
+			// optionsToolStripMenuItem
+			// 
+			this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mIDISettingsToolStripMenuItem});
+			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+			this.optionsToolStripMenuItem.Text = "Options";
+			// 
+			// mIDISettingsToolStripMenuItem
+			// 
+			this.mIDISettingsToolStripMenuItem.Name = "mIDISettingsToolStripMenuItem";
+			this.mIDISettingsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+			this.mIDISettingsToolStripMenuItem.Text = "MIDI settings";
+			this.mIDISettingsToolStripMenuItem.Click += new System.EventHandler(this.mIDISettingsToolStripMenuItem_Click);
+			// 
 			// lStyleName
 			// 
 			this.lStyleName.AutoSize = true;
 			this.lStyleName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
 			this.lStyleName.Location = new System.Drawing.Point(6, 15);
 			this.lStyleName.Name = "lStyleName";
-			this.lStyleName.Size = new System.Drawing.Size(148, 20);
+			this.lStyleName.Size = new System.Drawing.Size(187, 20);
 			this.lStyleName.TabIndex = 1;
-			this.lStyleName.Text = "Nincs stílus betöltve";
+			this.lStyleName.Text = "No style has been loaded";
 			// 
 			// lSignature
 			// 
 			this.lSignature.AutoSize = true;
 			this.lSignature.Location = new System.Drawing.Point(6, 39);
 			this.lSignature.Name = "lSignature";
-			this.lSignature.Size = new System.Drawing.Size(106, 13);
+			this.lSignature.Size = new System.Drawing.Size(99, 13);
 			this.lSignature.TabIndex = 2;
-			this.lSignature.Text = "Ismeretlen szignatúra";
+			this.lSignature.Text = "Unknown signature";
 			// 
 			// lMetronomeMark
 			// 
 			this.lMetronomeMark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.lMetronomeMark.Location = new System.Drawing.Point(488, 13);
+			this.lMetronomeMark.Location = new System.Drawing.Point(525, 13);
 			this.lMetronomeMark.Name = "lMetronomeMark";
 			this.lMetronomeMark.Size = new System.Drawing.Size(61, 13);
 			this.lMetronomeMark.TabIndex = 3;
@@ -106,7 +129,7 @@
 			// lTempo
 			// 
 			this.lTempo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.lTempo.Location = new System.Drawing.Point(485, 30);
+			this.lTempo.Location = new System.Drawing.Point(522, 30);
 			this.lTempo.Name = "lTempo";
 			this.lTempo.Size = new System.Drawing.Size(64, 13);
 			this.lTempo.TabIndex = 4;
@@ -115,24 +138,24 @@
 			// 
 			// gbStyleInfo
 			// 
-			this.gbStyleInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
+			this.gbStyleInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.gbStyleInfo.Controls.Add(this.lStyleName);
 			this.gbStyleInfo.Controls.Add(this.lTempo);
 			this.gbStyleInfo.Controls.Add(this.lSignature);
 			this.gbStyleInfo.Controls.Add(this.lMetronomeMark);
 			this.gbStyleInfo.Location = new System.Drawing.Point(12, 27);
 			this.gbStyleInfo.Name = "gbStyleInfo";
-			this.gbStyleInfo.Size = new System.Drawing.Size(555, 65);
+			this.gbStyleInfo.Size = new System.Drawing.Size(592, 65);
 			this.gbStyleInfo.TabIndex = 5;
 			this.gbStyleInfo.TabStop = false;
-			this.gbStyleInfo.Text = "Stílus";
+			this.gbStyleInfo.Text = "Style info";
 			// 
 			// lwMessages
 			// 
-			this.lwMessages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
+			this.lwMessages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.lwMessages.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader6,
             this.columnHeader1,
@@ -141,37 +164,37 @@
             this.columnHeader4,
             this.columnHeader5});
 			this.lwMessages.FullRowSelect = true;
-			this.lwMessages.Location = new System.Drawing.Point(12, 142);
+			this.lwMessages.Location = new System.Drawing.Point(12, 167);
 			this.lwMessages.Name = "lwMessages";
-			this.lwMessages.Size = new System.Drawing.Size(555, 209);
+			this.lwMessages.Size = new System.Drawing.Size(592, 226);
 			this.lwMessages.TabIndex = 6;
 			this.lwMessages.UseCompatibleStateImageBehavior = false;
 			this.lwMessages.View = System.Windows.Forms.View.Details;
 			// 
 			// columnHeader6
 			// 
-			this.columnHeader6.Text = "Idő";
+			this.columnHeader6.Text = "Time";
 			// 
 			// columnHeader1
 			// 
-			this.columnHeader1.Text = "Típus";
+			this.columnHeader1.Text = "Message";
 			this.columnHeader1.Width = 88;
 			// 
 			// columnHeader2
 			// 
-			this.columnHeader2.Text = "Csatorna";
+			this.columnHeader2.Text = "Channel";
 			// 
 			// columnHeader3
 			// 
-			this.columnHeader3.Text = "Adat1";
+			this.columnHeader3.Text = "Data1";
 			// 
 			// columnHeader4
 			// 
-			this.columnHeader4.Text = "Adat2";
+			this.columnHeader4.Text = "Data2";
 			// 
 			// columnHeader5
 			// 
-			this.columnHeader5.Text = "Adat3";
+			this.columnHeader5.Text = "Data3";
 			// 
 			// comboBox1
 			// 
@@ -187,12 +210,10 @@
             "Fill to Variation2",
             "Fill to Original",
             "Ending"});
-			this.comboBox1.Location = new System.Drawing.Point(125, 98);
+			this.comboBox1.Location = new System.Drawing.Point(119, 25);
 			this.comboBox1.Name = "comboBox1";
 			this.comboBox1.Size = new System.Drawing.Size(121, 21);
 			this.comboBox1.TabIndex = 7;
-			this.comboBox1.SelectedIndex = 0;
-			this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
 			// 
 			// comboBox2
 			// 
@@ -202,12 +223,10 @@
 			this.comboBox2.Items.AddRange(new object[] {
             "Basic",
             "Advanced"});
-			this.comboBox2.Location = new System.Drawing.Point(12, 98);
+			this.comboBox2.Location = new System.Drawing.Point(6, 25);
 			this.comboBox2.Name = "comboBox2";
 			this.comboBox2.Size = new System.Drawing.Size(107, 21);
 			this.comboBox2.TabIndex = 8;
-			this.comboBox2.SelectedIndex = 0;
-			this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
 			// 
 			// comboBox3
 			// 
@@ -223,12 +242,10 @@
             "Acc4",
             "Acc5",
             "Acc6"});
-			this.comboBox3.Location = new System.Drawing.Point(252, 98);
+			this.comboBox3.Location = new System.Drawing.Point(246, 25);
 			this.comboBox3.Name = "comboBox3";
 			this.comboBox3.Size = new System.Drawing.Size(68, 21);
 			this.comboBox3.TabIndex = 9;
-			this.comboBox3.SelectedIndex = 0;
-			this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
 			// 
 			// comboBox4
 			// 
@@ -239,41 +256,74 @@
             "Major",
             "Minor",
             "7th"});
-			this.comboBox4.Location = new System.Drawing.Point(326, 98);
+			this.comboBox4.Location = new System.Drawing.Point(320, 25);
 			this.comboBox4.Name = "comboBox4";
 			this.comboBox4.Size = new System.Drawing.Size(73, 21);
 			this.comboBox4.TabIndex = 10;
-			this.comboBox4.SelectedIndex = 0;
-			this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.comboBox4_SelectedIndexChanged);
 			// 
 			// btnPlay
 			// 
 			this.btnPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnPlay.Enabled = false;
-			this.btnPlay.Location = new System.Drawing.Point(492, 96);
+			this.btnPlay.Location = new System.Drawing.Point(104, 17);
 			this.btnPlay.Name = "btnPlay";
 			this.btnPlay.Size = new System.Drawing.Size(75, 23);
 			this.btnPlay.TabIndex = 11;
-			this.btnPlay.Text = "Lejátszás";
+			this.btnPlay.Text = "Play";
 			this.btnPlay.UseVisualStyleBackColor = true;
 			this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
 			// 
-			// label1
+			// groupBox1
 			// 
-			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.label1.Location = new System.Drawing.Point(405, 101);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(81, 13);
-			this.label1.TabIndex = 12;
-			this.label1.Text = "0:0:0 (0)";
-			this.label1.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			this.groupBox1.Controls.Add(this.comboBox2);
+			this.groupBox1.Controls.Add(this.comboBox1);
+			this.groupBox1.Controls.Add(this.comboBox3);
+			this.groupBox1.Controls.Add(this.comboBox4);
+			this.groupBox1.Location = new System.Drawing.Point(12, 98);
+			this.groupBox1.Name = "groupBox1";
+			this.groupBox1.Size = new System.Drawing.Size(401, 63);
+			this.groupBox1.TabIndex = 14;
+			this.groupBox1.TabStop = false;
+			this.groupBox1.Text = "Part select";
+			// 
+			// groupBox2
+			// 
+			this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox2.Controls.Add(this.lTotalTime);
+			this.groupBox2.Controls.Add(this.lFriendlyTime);
+			this.groupBox2.Controls.Add(this.btnPlay);
+			this.groupBox2.Controls.Add(this.pbBeat);
+			this.groupBox2.Location = new System.Drawing.Point(419, 98);
+			this.groupBox2.Name = "groupBox2";
+			this.groupBox2.Size = new System.Drawing.Size(185, 63);
+			this.groupBox2.TabIndex = 15;
+			this.groupBox2.TabStop = false;
+			this.groupBox2.Text = "Playback";
+			// 
+			// lFriendlyTime
+			// 
+			this.lFriendlyTime.AutoSize = true;
+			this.lFriendlyTime.Location = new System.Drawing.Point(6, 23);
+			this.lFriendlyTime.Name = "lFriendlyTime";
+			this.lFriendlyTime.Size = new System.Drawing.Size(31, 13);
+			this.lFriendlyTime.TabIndex = 16;
+			this.lFriendlyTime.Text = "0.0.0";
+			// 
+			// lTotalTime
+			// 
+			this.lTotalTime.AutoSize = true;
+			this.lTotalTime.Location = new System.Drawing.Point(6, 36);
+			this.lTotalTime.Name = "lTotalTime";
+			this.lTotalTime.Size = new System.Drawing.Size(13, 13);
+			this.lTotalTime.TabIndex = 16;
+			this.lTotalTime.Text = "0";
 			// 
 			// pbBeat
 			// 
 			this.pbBeat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.pbBeat.BackColor = System.Drawing.Color.White;
 			this.pbBeat.ForeColor = System.Drawing.Color.Green;
-			this.pbBeat.Location = new System.Drawing.Point(492, 125);
+			this.pbBeat.Location = new System.Drawing.Point(104, 46);
 			this.pbBeat.Maximum = 100;
 			this.pbBeat.Minimum = 0;
 			this.pbBeat.Name = "pbBeat";
@@ -281,28 +331,26 @@
 			this.pbBeat.TabIndex = 13;
 			this.pbBeat.Value = 0;
 			// 
-			// Form1
+			// frmMainWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(579, 363);
-			this.Controls.Add(this.pbBeat);
-			this.Controls.Add(this.label1);
-			this.Controls.Add(this.btnPlay);
-			this.Controls.Add(this.comboBox4);
-			this.Controls.Add(this.comboBox3);
-			this.Controls.Add(this.comboBox2);
-			this.Controls.Add(this.comboBox1);
+			this.ClientSize = new System.Drawing.Size(616, 405);
+			this.Controls.Add(this.groupBox2);
+			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.lwMessages);
 			this.Controls.Add(this.gbStyleInfo);
 			this.Controls.Add(this.menuStrip1);
 			this.MainMenuStrip = this.menuStrip1;
-			this.Name = "Form1";
+			this.Name = "frmMainWindow";
 			this.Text = "TomiSoft Roland Style Reader";
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.gbStyleInfo.ResumeLayout(false);
 			this.gbStyleInfo.PerformLayout();
+			this.groupBox1.ResumeLayout(false);
+			this.groupBox2.ResumeLayout(false);
+			this.groupBox2.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -330,8 +378,13 @@
 		private System.Windows.Forms.ComboBox comboBox3;
 		private System.Windows.Forms.ComboBox comboBox4;
 		private System.Windows.Forms.Button btnPlay;
-		private System.Windows.Forms.Label label1;
 		private CustomProgressBar pbBeat;
+		private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem mIDISettingsToolStripMenuItem;
+		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.GroupBox groupBox2;
+		private System.Windows.Forms.Label lTotalTime;
+		private System.Windows.Forms.Label lFriendlyTime;
 	}
 }
 
