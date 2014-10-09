@@ -208,9 +208,10 @@ namespace TomiSoft.RolandStyleReader {
 					6
 				);
 
-				Time += this.FileContents[Offset + 0];
-
-				yield return MidiMessage.CreateFromData(Data, Time);
+				MidiMessage msg = MidiMessage.CreateFromData(Data, Time);
+				Time += this.FileContents[Offset];
+				
+				yield return msg;
 			}
 		}
 	}
