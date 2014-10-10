@@ -41,25 +41,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChordType.cs" />
-    <Compile Include="Instrument.cs" />
-    <Compile Include="InstrumentAddress.cs" />
-    <Compile Include="Measure.cs" />
+    <Compile Include="Enumerations\Arrangement.cs" />
+    <Compile Include="Enumerations\ChordType.cs" />
+    <Compile Include="Enumerations\Instrument.cs" />
+    <Compile Include="Exceptions\UnsupportedMessageException.cs" />
+    <Compile Include="Messages\UnknownMessage.cs" />
+    <Compile Include="RolandStyleData.cs" />
+    <Compile Include="Structures\InstrumentAddress.cs" />
+    <Compile Include="Structures\Measure.cs" />
     <Compile Include="Messages\AdaptiveChordVoicingMessage.cs" />
     <Compile Include="Messages\ControlChangeMessage.cs" />
     <Compile Include="Messages\DataEntryMessage.cs" />
     <Compile Include="Messages\NoteMessage.cs" />
-    <Compile Include="Messages\NoteValueOutOfRangeException.cs" />
-    <Compile Include="Messages\NoteVelocityOutOfRangeException.cs" />
+    <Compile Include="Exceptions\NoteValueOutOfRangeException.cs" />
+    <Compile Include="Exceptions\NoteVelocityOutOfRangeException.cs" />
     <Compile Include="Messages\PitchWheelMessage.cs" />
     <Compile Include="Messages\ProgramChangeMessage.cs" />
     <Compile Include="MidiMessage.cs" />
-    <Compile Include="MidiMessageType.cs" />
+    <Compile Include="Enumerations\MidiMessageType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RolandStyle.cs" />
-    <Compile Include="StylePart.cs" />
-    <Compile Include="StyleSignature.cs" />
-    <Compile Include="StyleTime.cs" />
+    <Compile Include="RolandStyleReader.cs" />
+    <Compile Include="Enumerations\StylePart.cs" />
+    <Compile Include="Enumerations\StyleSignature.cs" />
+    <Compile Include="Structures\StyleTime.cs" />
+    <Compile Include="StyleEntry.cs" />
+    <Compile Include="Exceptions\StylePartNotFoundException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

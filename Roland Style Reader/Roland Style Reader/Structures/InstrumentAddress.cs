@@ -42,8 +42,8 @@ namespace TomiSoft.RolandStyleReader {
 			get {
 				if (this.IsAvailable(Type))
 					return this.GetAddress(Type);
-				else
-					throw new Exception("Nincs ilyen bejegyzés a fájlban");
+				
+				throw new StylePartNotFoundException();
 			}
 		}
 

@@ -103,7 +103,19 @@ namespace TomiSoft.RolandStyleReader {
 				return (MidiMessageType) Data;
 			}
 
-			return MidiMessageType.Note;
+			if (Data >= 0 && Data <= 127)
+				return MidiMessageType.Note;
+
+			return MidiMessageType.Unknown;
+			//throw new UnsupportedMessageException(Data);
+		}
+
+		/// <summary>
+		/// Gets the string representation of the MidiMessage object.
+		/// </summary>
+		/// <returns>The string representation of this instance</returns>
+		public override string ToString() {
+			return String.Format("{0}:\t{1}", this.TotalTime, this.MessageType.ToString());
 		}
 	}
 }

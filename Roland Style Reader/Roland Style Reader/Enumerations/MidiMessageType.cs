@@ -36,6 +36,11 @@ namespace TomiSoft.RolandStyleReader {
 		/// <summary>
 		/// Represents the note message type
 		/// </summary>
-		Note = -1
+		Note = -1,
+
+		/// <summary>
+		/// Represents an unknown message type
+		/// </summary>
+		Unknown = -2
 	}
 }

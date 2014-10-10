@@ -1,11 +1,4 @@
-﻿/*
- * TomiSoft Roland Style Reader
- * ============================
- * Author: Sinku Tamás
- * License: GNU GPL v3
- * */
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +8,7 @@ namespace TomiSoft.RolandStyleReader {
 	/// <summary>
 	/// This class can parse a Roland style file
 	/// </summary>
-	public class RolandStyle {
+	public class RolandStyleReader {
 		private StyleSignature _signature;
 
 		/// <summary>
@@ -87,7 +80,7 @@ namespace TomiSoft.RolandStyleReader {
 		/// Loads the given Roland style file
 		/// </summary>
 		/// <param name="Filename">The path to the file</param>
-		public RolandStyle(string Filename) {
+		public RolandStyleReader(string Filename) {
 			this.FileContents = File.ReadAllBytes(Filename);
 
 			this.ReadFile();
@@ -97,7 +90,7 @@ namespace TomiSoft.RolandStyleReader {
 		/// Loads the Roland style from the given stream
 		/// </summary>
 		/// <param name="File">A stream that contains the file</param>
-		public RolandStyle(Stream File) {
+		public RolandStyleReader(Stream File) {
 			using (BinaryReader reader = new BinaryReader(File)) {
 				this.FileContents = reader.ReadBytes((int)File.Length);
 			}
@@ -141,7 +134,7 @@ namespace TomiSoft.RolandStyleReader {
 		/// Reads the style's name (0x2 - 0x11)
 		/// </summary>
 		private void GetStyleName() {
-			this._name = Encoding.ASCII.GetString(this.FileContents, 0x2, 0x11-0x2);
+			this._name = Encoding.ASCII.GetString(this.FileContents, 0x2, 16);
 		}
 
 		/// <summary>
@@ -192,7 +185,13 @@ namespace TomiSoft.RolandStyleReader {
 		}
 
 		private IEnumerable<MidiMessage> GetMidiMessages(InstrumentAddress Address, ChordType CType) {
-			int Addr = Address[CType];
+			int Addr;
+
+			if (Address.IsAvailable(CType) && Address[CType] < this.FileContents.Length) {
+				Addr = Address[CType];
+			}
+			else
+				yield break;
 
 			int Time = 0;
 			for (int Offset = Addr; true; Offset += 6) {
@@ -208,9 +207,10 @@ namespace TomiSoft.RolandStyleReader {
 					6
 				);
 
-				Time += this.FileContents[Offset + 0];
-
-				yield return MidiMessage.CreateFromData(Data, Time);
+				MidiMessage msg = MidiMessage.CreateFromData(Data, Time);
+				Time += this.FileContents[Offset];				
+				
+				yield return msg;
 			}
 		}
 	}

@@ -74,8 +74,12 @@ namespace TomiSoft.RolandStyleReader {
 		/// <param name="Message">An instance of the MidiMessage class</param>
 		/// <param name="Style">An instance of the RolandStyle class</param>
 		/// <returns>An instance of the StyleTime struct</returns>
-		public static StyleTime FromStyleMessage(MidiMessage Message, RolandStyle Style) {
+		public static StyleTime FromStyleMessage(MidiMessage Message, RolandStyleReader Style) {
 			return StyleTime.FromStyleTimestamp(Message.TotalTime, Style);
+		}
+
+		public static StyleTime FromStyleMessage(MidiMessage Message, RolandStyleData StyleData) {
+			return StyleTime.FromStyleTimestamp(Message.TotalTime, StyleData.Measure);
 		}
 
 		/// <summary>
@@ -84,11 +88,15 @@ namespace TomiSoft.RolandStyleReader {
 		/// <param name="TotalTime">The timestamp in ticks</param>
 		/// <param name="Style">An instance of the RolandStyle class</param>
 		/// <returns>An instance of the StyleTime struct</returns>
-		public static StyleTime FromStyleTimestamp(int TotalTime, RolandStyle Style) {
+		public static StyleTime FromStyleTimestamp(int TotalTime, RolandStyleReader Style) {
+			return StyleTime.FromStyleTimestamp(TotalTime, Style.Measure);
+		}
+
+		public static StyleTime FromStyleTimestamp(int TotalTime, Measure Measure) {
 			return new StyleTime(
 				TotalTime,
-				TotalTime / 120 / Style.Measure.Denominator + 1,
-				(TotalTime % (120 * Style.Measure.Numerator)) / 120 + 1,
+				TotalTime / 120 / Measure.Denominator + 1,
+				(TotalTime % (120 * Measure.Numerator)) / 120 + 1,
 				TotalTime % 120
 			);
 		}

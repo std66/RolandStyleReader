@@ -86,7 +86,7 @@ namespace TomiSoft.RolandStyleReader {
 					throw new NoteValueOutOfRangeException(this.Note);
 
 				if (this.Velocity < 0 || this.Velocity > 127)
-					throw new NoteVelocityOutOfRangeException(this.Velocity);
+					this.Data[3] = 127;
 		}
 	}
 }

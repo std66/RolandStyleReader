@@ -47,9 +47,10 @@
 			this.btnPlay = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
-			this.lFriendlyTime = new System.Windows.Forms.Label();
 			this.lTotalTime = new System.Windows.Forms.Label();
+			this.lFriendlyTime = new System.Windows.Forms.Label();
 			this.pbBeat = new StyleDemo.CustomProgressBar();
+			this.pbPlaybackPosition = new StyleDemo.CustomProgressBar();
 			this.menuStrip1.SuspendLayout();
 			this.gbStyleInfo.SuspendLayout();
 			this.groupBox1.SuspendLayout();
@@ -289,6 +290,7 @@
 			// groupBox2
 			// 
 			this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBox2.Controls.Add(this.pbPlaybackPosition);
 			this.groupBox2.Controls.Add(this.lTotalTime);
 			this.groupBox2.Controls.Add(this.lFriendlyTime);
 			this.groupBox2.Controls.Add(this.btnPlay);
@@ -300,23 +302,23 @@
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Playback";
 			// 
-			// lFriendlyTime
-			// 
-			this.lFriendlyTime.AutoSize = true;
-			this.lFriendlyTime.Location = new System.Drawing.Point(6, 23);
-			this.lFriendlyTime.Name = "lFriendlyTime";
-			this.lFriendlyTime.Size = new System.Drawing.Size(31, 13);
-			this.lFriendlyTime.TabIndex = 16;
-			this.lFriendlyTime.Text = "0.0.0";
-			// 
 			// lTotalTime
 			// 
 			this.lTotalTime.AutoSize = true;
-			this.lTotalTime.Location = new System.Drawing.Point(6, 36);
+			this.lTotalTime.Location = new System.Drawing.Point(6, 29);
 			this.lTotalTime.Name = "lTotalTime";
 			this.lTotalTime.Size = new System.Drawing.Size(13, 13);
 			this.lTotalTime.TabIndex = 16;
 			this.lTotalTime.Text = "0";
+			// 
+			// lFriendlyTime
+			// 
+			this.lFriendlyTime.AutoSize = true;
+			this.lFriendlyTime.Location = new System.Drawing.Point(6, 16);
+			this.lFriendlyTime.Name = "lFriendlyTime";
+			this.lFriendlyTime.Size = new System.Drawing.Size(31, 13);
+			this.lFriendlyTime.TabIndex = 16;
+			this.lFriendlyTime.Text = "0.0.0";
 			// 
 			// pbBeat
 			// 
@@ -330,6 +332,19 @@
 			this.pbBeat.Size = new System.Drawing.Size(75, 10);
 			this.pbBeat.TabIndex = 13;
 			this.pbBeat.Value = 0;
+			// 
+			// pbPlaybackPosition
+			// 
+			this.pbPlaybackPosition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.pbPlaybackPosition.BackColor = System.Drawing.Color.White;
+			this.pbPlaybackPosition.ForeColor = System.Drawing.Color.Green;
+			this.pbPlaybackPosition.Location = new System.Drawing.Point(8, 46);
+			this.pbPlaybackPosition.Maximum = 100;
+			this.pbPlaybackPosition.Minimum = 0;
+			this.pbPlaybackPosition.Name = "pbPlaybackPosition";
+			this.pbPlaybackPosition.Size = new System.Drawing.Size(75, 10);
+			this.pbPlaybackPosition.TabIndex = 17;
+			this.pbPlaybackPosition.Value = 0;
 			// 
 			// frmMainWindow
 			// 
@@ -385,6 +400,7 @@
 		private System.Windows.Forms.GroupBox groupBox2;
 		private System.Windows.Forms.Label lTotalTime;
 		private System.Windows.Forms.Label lFriendlyTime;
+		private CustomProgressBar pbPlaybackPosition;
 	}
 }
 
