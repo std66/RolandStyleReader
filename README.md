@@ -6,7 +6,7 @@ For documentation, see Documentation.chm file.
 
 Requirements
 ------------
-This library requires Microsoft .NET Framework 4. No other libraries required.
+This library requires Microsoft .NET Framework 4 or compatible Mono Framework. No other libraries required.
 
 Usage
 -----
@@ -18,7 +18,9 @@ Usage
 Example
 -------
 A simple example is available in the "StyleDemo" project. Note that this project still under development. In the
-example the Midi-dot-net library is used for playback the style. For more information and license, see
+example the Midi-dot-net library is used for playback the style. The Midi-dot-net library requires Microsoft Windows Multimedia API (winmm.dll), that is only available for Microsoft Windows platform. Because of this, the example application can only run on Microsoft Windows.
+
+For more information about Midi-dot-net and license, see
 https://code.google.com/p/midi-dot-net/
 
 Known issues
