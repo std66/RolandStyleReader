@@ -65,7 +65,7 @@ namespace TomiSoft.RolandStyleReader {
 		/// </summary>
 		/// <returns></returns>
 		public override string ToString() {
-			return this.bar + ":" + this.beat + ":" + this.ClockPulseTime + " (" + this.rawTime + ")";
+			return this.bar + ":" + this.beat + ":" + this.ClockPulseTime.ToString("D3");
 		}
 
 		/// <summary>
@@ -74,7 +74,7 @@ namespace TomiSoft.RolandStyleReader {
 		/// <param name="Message">An instance of the MidiMessage class</param>
 		/// <param name="Style">An instance of the RolandStyle class</param>
 		/// <returns>An instance of the StyleTime struct</returns>
-		public static StyleTime FromStyleMessage(MidiMessage Message, RolandStyleReader Style) {
+		public static StyleTime FromStyleMessage(MidiMessage Message, Reader_STL_2var Style) {
 			return StyleTime.FromStyleTimestamp(Message.TotalTime, Style);
 		}
 
@@ -88,14 +88,20 @@ namespace TomiSoft.RolandStyleReader {
 		/// <param name="TotalTime">The timestamp in ticks</param>
 		/// <param name="Style">An instance of the RolandStyle class</param>
 		/// <returns>An instance of the StyleTime struct</returns>
-		public static StyleTime FromStyleTimestamp(int TotalTime, RolandStyleReader Style) {
+		public static StyleTime FromStyleTimestamp(int TotalTime, Reader_STL_2var Style) {
 			return StyleTime.FromStyleTimestamp(TotalTime, Style.Measure);
 		}
 
+		/// <summary>
+		/// Gets a StyleTime struct using a timestamp that is represented in ticks
+		/// </summary>
+		/// <param name="TotalTime">The timestamp in ticks</param>
+		/// <param name="Measure">An instance of the Measure struct that represents the beat informations of the style</param>
+		/// <returns>An instance of the StyleTime struct</returns>
 		public static StyleTime FromStyleTimestamp(int TotalTime, Measure Measure) {
 			return new StyleTime(
 				TotalTime,
-				TotalTime / 120 / Measure.Denominator + 1,
+				TotalTime / 120 / Measure.Numerator + 1,
 				(TotalTime % (120 * Measure.Numerator)) / 120 + 1,
 				TotalTime % 120
 			);

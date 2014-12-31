@@ -12,6 +12,7 @@
     <AssemblyName>Roland Style Reader</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,6 +23,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\Roland Style Reader.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,6 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -44,9 +47,12 @@
     <Compile Include="Enumerations\Arrangement.cs" />
     <Compile Include="Enumerations\ChordType.cs" />
     <Compile Include="Enumerations\Instrument.cs" />
+    <Compile Include="Enumerations\StyleFileFormat.cs" />
     <Compile Include="Exceptions\UnsupportedMessageException.cs" />
+    <Compile Include="IStyleReader.cs" />
     <Compile Include="Messages\UnknownMessage.cs" />
     <Compile Include="RolandStyleData.cs" />
+    <Compile Include="Reader_STH.cs" />
     <Compile Include="Structures\InstrumentAddress.cs" />
     <Compile Include="Structures\Measure.cs" />
     <Compile Include="Messages\AdaptiveChordVoicingMessage.cs" />
@@ -60,7 +66,7 @@
     <Compile Include="MidiMessage.cs" />
     <Compile Include="Enumerations\MidiMessageType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RolandStyleReader.cs" />
+    <Compile Include="Reader_STL_2var.cs" />
     <Compile Include="Enumerations\StylePart.cs" />
     <Compile Include="Enumerations\StyleSignature.cs" />
     <Compile Include="Structures\StyleTime.cs" />

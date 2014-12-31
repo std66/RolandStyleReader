@@ -49,8 +49,9 @@
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.lTotalTime = new System.Windows.Forms.Label();
 			this.lFriendlyTime = new System.Windows.Forms.Label();
-			this.pbBeat = new StyleDemo.CustomProgressBar();
 			this.pbPlaybackPosition = new StyleDemo.CustomProgressBar();
+			this.pbBeat = new StyleDemo.CustomProgressBar();
+			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.gbStyleInfo.SuspendLayout();
 			this.groupBox1.SuspendLayout();
@@ -71,7 +72,8 @@
 			// fileToolStripMenuItem
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem});
+            this.openToolStripMenuItem,
+            this.saveToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
 			this.fileToolStripMenuItem.Text = "File";
@@ -79,7 +81,7 @@
 			// openToolStripMenuItem
 			// 
 			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-			this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+			this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.openToolStripMenuItem.Text = "Open";
 			this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
 			// 
@@ -320,6 +322,19 @@
 			this.lFriendlyTime.TabIndex = 16;
 			this.lFriendlyTime.Text = "0.0.0";
 			// 
+			// pbPlaybackPosition
+			// 
+			this.pbPlaybackPosition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.pbPlaybackPosition.BackColor = System.Drawing.Color.White;
+			this.pbPlaybackPosition.ForeColor = System.Drawing.Color.Green;
+			this.pbPlaybackPosition.Location = new System.Drawing.Point(8, 46);
+			this.pbPlaybackPosition.Maximum = 100;
+			this.pbPlaybackPosition.Minimum = 0;
+			this.pbPlaybackPosition.Name = "pbPlaybackPosition";
+			this.pbPlaybackPosition.Size = new System.Drawing.Size(75, 10);
+			this.pbPlaybackPosition.TabIndex = 17;
+			this.pbPlaybackPosition.Value = 0;
+			// 
 			// pbBeat
 			// 
 			this.pbBeat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -333,18 +348,12 @@
 			this.pbBeat.TabIndex = 13;
 			this.pbBeat.Value = 0;
 			// 
-			// pbPlaybackPosition
+			// saveToolStripMenuItem
 			// 
-			this.pbPlaybackPosition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.pbPlaybackPosition.BackColor = System.Drawing.Color.White;
-			this.pbPlaybackPosition.ForeColor = System.Drawing.Color.Green;
-			this.pbPlaybackPosition.Location = new System.Drawing.Point(8, 46);
-			this.pbPlaybackPosition.Maximum = 100;
-			this.pbPlaybackPosition.Minimum = 0;
-			this.pbPlaybackPosition.Name = "pbPlaybackPosition";
-			this.pbPlaybackPosition.Size = new System.Drawing.Size(75, 10);
-			this.pbPlaybackPosition.TabIndex = 17;
-			this.pbPlaybackPosition.Value = 0;
+			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.saveToolStripMenuItem.Text = "Save";
+			this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
 			// 
 			// frmMainWindow
 			// 
@@ -401,6 +410,7 @@
 		private System.Windows.Forms.Label lTotalTime;
 		private System.Windows.Forms.Label lFriendlyTime;
 		private CustomProgressBar pbPlaybackPosition;
+		private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
 	}
 }
 

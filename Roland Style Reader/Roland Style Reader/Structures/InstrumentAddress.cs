@@ -82,5 +82,13 @@ namespace TomiSoft.RolandStyleReader {
 
 			throw new Exception("Ismeretlen paraméter");
 		}
+
+		public override string ToString() {
+			return String.Format("Major = {0}, Minor = {1}, 7th = {2}", new object[] {
+				this.major.ToString("X"),
+				this.minor.ToString("X"),
+				this.seventh.ToString("X")
+			});
+		}
 	}
 }

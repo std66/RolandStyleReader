@@ -16,6 +16,11 @@ namespace TomiSoft.RolandStyleReader {
 		/// <summary>
 		/// Represents the G8 style signature
 		/// </summary>
-		G8
+		G8,
+
+		/// <summary>
+		/// Represents the Roland STH style format
+		/// </summary>
+		STH
 	}
 }

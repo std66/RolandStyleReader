@@ -6,6 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
+
 using TomiSoft.RolandStyleReader;
 using Midi;
 
@@ -35,7 +39,7 @@ namespace StyleDemo {
 
 		private void openToolStripMenuItem_Click(object sender, EventArgs e) {
 			OpenFileDialog dlg = new OpenFileDialog();
-			dlg.Filter = "Roland style (*.stl)|*.stl";
+			dlg.Filter = "Roland style (*.stl, *.sth)|*.stl;*.sth";
 
 			if (dlg.ShowDialog() == DialogResult.OK) {
 				#region Do some WinForms shit
@@ -46,7 +50,14 @@ namespace StyleDemo {
 				this.comboBox4.Enabled = true;
 				#endregion
 
-				RolandStyleReader Reader = new RolandStyleReader(dlg.FileName);
+				IStyleReader_2variation Reader;
+				string Ext = Path.GetExtension(dlg.FileName);
+
+				if (Ext.ToLower().Contains("stl"))
+					Reader = new Reader_STL_2var(dlg.FileName);
+				else
+					Reader = new Reader_STH(dlg.FileName);
+
 				this.data = RolandStyleData.CreateFromReader(Reader);
 
 				this.lStyleName.Text = this.data.Name;
@@ -312,6 +323,16 @@ namespace StyleDemo {
 
 			if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
 				this.dev = dlg.Device;
+		}
+
+		private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
+			SaveFileDialog dlg = new SaveFileDialog();
+			dlg.Filter = "XML document|*.xml";
+			if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+				XmlSerializer xml = new XmlSerializer(this.data.GetType());
+				XmlWriter wrt = XmlWriter.Create(dlg.FileName);
+				xml.Serialize(wrt, this.data);
+			}
 		}
 	}
 }

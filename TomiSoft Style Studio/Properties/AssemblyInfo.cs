@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ArrangerDemo")]
+[assembly: AssemblyTitle("TomiSoft Style Studio")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ArrangerDemo")]
+[assembly: AssemblyProduct("TomiSoft Style Studio")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("dd265ed3-4a5b-4c8e-b4ae-a4a0bdcd175e")]
+[assembly: Guid("0eebbcbf-be35-4af0-96a8-7a4a1f456df9")]
 
 // Version information for an assembly consists of the following four values:
 //
