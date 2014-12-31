@@ -83,6 +83,10 @@ namespace TomiSoft.RolandStyleReader {
 			throw new Exception("Ismeretlen paraméter");
 		}
 
+		/// <summary>
+		/// Gets the string representation of the InstrumentAddress instance.
+		/// </summary>
+		/// <returns>The string representation of the instance</returns>
 		public override string ToString() {
 			return String.Format("Major = {0}, Minor = {1}, 7th = {2}", new object[] {
 				this.major.ToString("X"),

@@ -11,6 +11,10 @@ namespace TomiSoft.RolandStyleReader {
 	/// </summary>
 	public class Reader_STL_2var : IStyleReader_2variation {
 		private StyleSignature _signature;
+		private string _name;
+		private int _tempo;
+		private Measure _measure;
+		private byte[] FileContents;
 
 		/// <summary>
 		/// Gets the style's signature (G8 or EV)
@@ -19,8 +23,6 @@ namespace TomiSoft.RolandStyleReader {
 			get { return _signature; }
 		}
 
-		private string _name;
-
 		/// <summary>
 		/// Gets the style's name
 		/// </summary>
@@ -28,16 +30,12 @@ namespace TomiSoft.RolandStyleReader {
 			get { return _name; }
 		}
 
-		private int _tempo;
-
 		/// <summary>
 		/// Gets the style's tempo in BPM
 		/// </summary>
 		public int Tempo {
 			get { return _tempo; }
 		}
-
-		private Measure _measure;
 
 		/// <summary>
 		/// Gets the style's metronome mark
@@ -65,8 +63,6 @@ namespace TomiSoft.RolandStyleReader {
 			}
 		}
 		
-		private byte[] FileContents;
-
 		/// <summary>
 		/// Addresses of the style's Basic part
 		/// </summary>
@@ -170,6 +166,12 @@ namespace TomiSoft.RolandStyleReader {
 			}
 		}
 
+		/// <summary>
+		/// Reads up the addresses of a given instrument
+		/// </summary>
+		/// <param name="InstrStartOffset">The start offset of the data</param>
+		/// <param name="Instr">Which instrument to read</param>
+		/// <param name="TargetDict">The target dictionary to store the address data</param>
 		private void ReadInstrumentAddress(int InstrStartOffset, Instrument Instr, Dictionary<Instrument, Dictionary<StylePart, InstrumentAddress>> TargetDict) {
 			for (int CurrentPart = 0; CurrentPart < 8; CurrentPart++) {
 				int PartStart = CurrentPart * 12;
@@ -185,6 +187,12 @@ namespace TomiSoft.RolandStyleReader {
 			}
 		}
 
+		/// <summary>
+		/// Reads the MIDI messages at the given address
+		/// </summary>
+		/// <param name="Address">The address to read</param>
+		/// <param name="CType">The chord family to read</param>
+		/// <returns>A collection that stores the MidiMessage instances</returns>
 		private IEnumerable<MidiMessage> GetMidiMessages(InstrumentAddress Address, ChordType CType) {
 			int Addr;
 

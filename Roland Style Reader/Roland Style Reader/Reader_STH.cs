@@ -6,22 +6,39 @@ using System.IO;
 using System.Diagnostics;
 
 namespace TomiSoft.RolandStyleReader {
+	/// <summary>
+	/// This class can parse a Roland style file that has STH file extension.
+	/// </summary>
 	public class Reader_STH : IStyleReader_2variation {
 		private string name;
+		private int tempo;
+		private Measure measure;
+		private byte[] FileContents;
+
+		/// <summary>
+		/// Gets the name of the style
+		/// </summary>
 		public string Name {
 			get { return name; }
 		}
 
-		private int tempo;
+		/// <summary>
+		/// Gets the tempo of the style in BPM
+		/// </summary>
 		public int Tempo {
 			get { return tempo; }
 		}
 
-		private Measure measure;
+		/// <summary>
+		/// Gets the style's measure
+		/// </summary>
 		public Measure Measure {
 			get { return measure; }
 		}
 
+		/// <summary>
+		/// Gets the signature representing the format of the style
+		/// </summary>
 		public StyleSignature Signature {
 			get {
 				return StyleSignature.STH;
@@ -57,14 +74,20 @@ namespace TomiSoft.RolandStyleReader {
 		/// </summary>
 		private Dictionary<Instrument, Dictionary<StylePart, InstrumentAddress>> AdvancedAddresses;
 
-		private byte[] FileContents;
-
+		/// <summary>
+		/// Opens and reads the style file.
+		/// </summary>
+		/// <param name="Filename">The path to the file</param>
 		public Reader_STH(string Filename) {
 			this.FileContents = File.ReadAllBytes(Filename);
 
 			this.ReadFile();
 		}
 
+		/// <summary>
+		/// Opens and reads the style file.
+		/// </summary>
+		/// <param name="File">The stream representing the file</param>
 		public Reader_STH(Stream File) {
 			using (BinaryReader reader = new BinaryReader(File)) {
 				this.FileContents = reader.ReadBytes((int)File.Length);
@@ -73,6 +96,9 @@ namespace TomiSoft.RolandStyleReader {
 			this.ReadFile();
 		}
 
+		/// <summary>
+		/// Reads up the entire file.
+		/// </summary>
 		private void ReadFile() {
 			this.GetStyleName();
 			this.GetTempo();
@@ -89,7 +115,7 @@ namespace TomiSoft.RolandStyleReader {
 		}
 
 		/// <summary>
-		/// Reads the style's name
+		/// Reads the style's name (0x2 - 0x11)
 		/// </summary>
 		private void GetStyleName() {
 			this.name = Encoding.ASCII.GetString(this.FileContents, 0x2, 16);
@@ -113,6 +139,9 @@ namespace TomiSoft.RolandStyleReader {
 			this.measure = new Measure(BeatsInMeasure, BeatLength);
 		}
 
+		/// <summary>
+		/// Reads up the address part of the file
+		/// </summary>
 		private void ReadAddresses() {
 			Instrument CurrentInstrument = 0;
 			for (int StartOffset = 0x6AA; StartOffset <= 0xCA9; StartOffset += 192, CurrentInstrument++) {
@@ -123,6 +152,12 @@ namespace TomiSoft.RolandStyleReader {
 			}
 		}
 
+		/// <summary>
+		/// Reads up the addresses of a given instrument
+		/// </summary>
+		/// <param name="InstrStartOffset">The start offset of the data</param>
+		/// <param name="Instr">Which instrument to read</param>
+		/// <param name="TargetDict">The target dictionary to store the address data</param>
 		private void ReadInstrumentAddress(int InstrStartOffset, Instrument Instr, Dictionary<Instrument, Dictionary<StylePart, InstrumentAddress>> TargetDict) {
 			for (int CurrentPart = 0; CurrentPart < 8; CurrentPart++) {
 				int PartStart = CurrentPart * 12;
@@ -142,6 +177,12 @@ namespace TomiSoft.RolandStyleReader {
 			}
 		}
 
+		/// <summary>
+		/// Reads the MIDI messages at the given address
+		/// </summary>
+		/// <param name="Address">The address to read</param>
+		/// <param name="CType">The chord family to read</param>
+		/// <returns>A collection that stores the MidiMessage instances</returns>
 		private IEnumerable<MidiMessage> GetMidiMessages(InstrumentAddress Address, ChordType CType) {
 			int Addr;
 
